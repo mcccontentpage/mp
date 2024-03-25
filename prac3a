@@ -1,0 +1,76 @@
+package com.example.lifecycle 
+ 
+import android.annotation.SuppressLint 
+import androidx.appcompat.app.AppCompatActivity 
+import android.os.Bundle 
+import android.util.Log 
+import android.widget.* 
+ 
+class MainActivity : AppCompatActivity() { 
+ 
+    @SuppressLint("MissingInflatedId") 
+    override fun onCreate(savedInstanceState: Bundle?) { 
+        super.onCreate(savedInstanceState) 
+        setContentView(R.layout.activity_main) 
+ 
+        val edtName = findViewById<EditText>(R.id.edtName) 
+        val rg = findViewById<RadioGroup>(R.id.rg) 
+        val rbMale = findViewById<RadioButton>(R.id.rbMale) 
+        val rbFemale = findViewById<RadioButton>(R.id.rbFemale) 
+        val rbOther = findViewById<RadioButton>(R.id.rbOther) 
+        val chbDance = findViewById<CheckBox>(R.id.chbDance) 
+        val chbSing = findViewById<CheckBox>(R.id.chbSing) 
+        val chbRead = findViewById<CheckBox>(R.id.chbRead) 
+        val btnOk = findViewById<Button>(R.id.btnOk) 
+        val tvName = findViewById<TextView>(R.id.tvName) 
+        val tvGender = findViewById<TextView>(R.id.tvGender) 
+        val tvHobbies = findViewById<TextView>(R.id.tvHobbies) 
+        val imgBtn = findViewById<ImageButton>(R.id.imgBtn) 
+        val tg = findViewById<ToggleButton>(R.id.tg) 
+        var s = "" 
+ 
+        btnOk.setOnClickListener { 
+            tvName.text = edtName.text 
+ 
+            if(rbMale.isChecked) 
+                tvGender.text = rbMale.text 
+            else if (rbFemale.isChecked) 
+                tvGender.text = rbFemale.text 
+            else 
+                tvGender.text = rbOther.text 
+ 
+            if(chbDance.isChecked) 
+                s = chbDance.text as String 
+            if(chbSing.isChecked) 
+                s = s + " " + chbSing.text as String 
+            if(chbRead.isChecked) 
+                s = s + " " + chbRead.text as String 
+            tvHobbies.text = s 
+        } 
+ 
+        imgBtn.setOnClickListener { 
+            edtName.setText("") 
+            rbMale.isChecked = false 
+            rbFemale.isChecked = false 
+            rbOther.isChecked = false 
+            chbDance.isChecked = false 
+            chbSing.isChecked = false 
+            chbRead.isChecked = false 
+            tvName.setText("") 
+            tvGender.setText("") 
+            tvHobbies.setText("") 
+        } 
+ 
+        tg.setOnCheckedChangeListener { _, isChecked -> 
+            if(isChecked) 
+            { 
+                Toast.makeText(this, "Toggle Button is ON", Toast.LENGTH_LONG).show() 
+            } 
+            else 
+            { 
+                Toast.makeText(this, "Toggle Button is OFF", Toast.LENGTH_LONG).show() 
+            } 
+        } 
+    } 
+} 
+ 
